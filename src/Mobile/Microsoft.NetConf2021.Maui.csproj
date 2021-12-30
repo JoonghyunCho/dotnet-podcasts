@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <!-- iOS, Android, MacCatalyst -->
-    <TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
+    <!--<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>-->
+    <TargetFrameworks>net6.0-tizen</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>Microsoft.NetConf2021.Maui</RootNamespace>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-    <UseMaui>true</UseMaui>
+    <!--<UseMaui>true</UseMaui>-->
     <SingleProject>true</SingleProject>
-    <MauiVersion>$(MauiV)</MauiVersion>
+    <!--<MauiVersion>$(MauiV)</MauiVersion>-->
     <!-- Display name -->
     <ApplicationTitle>.NET Pods</ApplicationTitle>
 
@@ -28,7 +29,24 @@
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-tizen'">6.5</SupportedOSPlatformVersion>
   </PropertyGroup>
+
+
+  <ItemGroup Condition=" '$(UseMaui)' != 'true' ">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(UseMaui)' != 'true' ">
+    <ProjectReference Include="..\..\..\..\..\Core\src\Core-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Controls\src\Xaml\Controls.Xaml-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Controls\src\Core\Controls.Core-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\BlazorWebView\src\Maui\Microsoft.AspNetCore.Components.WebView.Maui.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Essentials\src\Essentials-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Compatibility\Core\src\Compatibility-net6.csproj" />
+  </ItemGroup>
+
+  <Import Condition=" '$(UseMaui)' != 'true' " Project="..\..\..\..\..\BlazorWebView\src\Maui\build\Microsoft.AspNetCore.Components.WebView.Maui.targets" />
 
   <ItemGroup>
     <!-- App Icon -->
@@ -84,5 +102,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_MauiCompileToAdd Remove="Platforms\Tizen\AudioService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Platforms\Tizen\AudioService.cs" />
   </ItemGroup>
 </Project>

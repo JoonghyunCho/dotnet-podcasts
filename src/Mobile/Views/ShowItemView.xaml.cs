@@ -31,6 +31,7 @@ public partial class ShowItemView
     public ShowItemView()
     {
         InitializeComponent();
+        //Console.WriteLine($"%%%%%%%%%%%%%%%%% ShowItemView: {BindingContext.GetType()}");
     }
 }
 

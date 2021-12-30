@@ -110,9 +110,9 @@ namespace Microsoft.NetConf2021.Maui.ViewModels
             Episodes = show.Episodes.ToList();
         }
 
-        private async Task NavigateToPlayerCommandExecute(Episode episode)
+        private Task NavigateToPlayerCommandExecute(Episode episode)
         {
-          
+            return Task.CompletedTask;
         }
 
         private async Task TapEpisodeCommandExecute(Episode episode)

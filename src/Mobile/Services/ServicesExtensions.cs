@@ -24,6 +24,8 @@ public static class ServicesExtensions
             builder.Services.TryAddSingleton< Platforms.MacCatalyst.ConnectivityService>();
 #elif IOS
         builder.Services.TryAddSingleton<IAudioService, Platforms.iOS.AudioService>();
+#elif TIZEN
+        builder.Services.TryAddSingleton<IAudioService, Platforms.Tizen.AudioService>();
 #endif
 
         builder.Services.TryAddTransient<WifiOptionsService>();

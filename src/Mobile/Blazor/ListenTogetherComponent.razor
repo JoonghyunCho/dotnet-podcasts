@@ -15,9 +15,9 @@
 				OnPlayerStateChange="@UpdatePlayer" />
 
 @code {
-	private ListenTogether? listenTogetherRef;
+	private ListenTogether listenTogetherRef;
 	private Guid? episodeId;
-	private string? roomCode;
+	private string roomCode;
 	private bool canCreateRoom = false;
 
 	protected override void OnInitialized()

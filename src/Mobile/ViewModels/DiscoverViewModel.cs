@@ -12,6 +12,7 @@ public class DiscoverViewModel : BaseViewModel
     private string text;
 
     public ObservableRangeCollection<ShowGroup> PodcastsGroup { get; private set; } = new ObservableRangeCollection<ShowGroup>();
+    public ObservableRangeCollection<ShowViewModel> ShowList { get; private set; } = new ObservableRangeCollection<ShowViewModel>();
 
     public ICommand SearchCommand { get; }
 
@@ -41,6 +42,17 @@ public class DiscoverViewModel : BaseViewModel
 
         SearchCommand = new AsyncCommand(OnSearchCommandAsync);
         categoriesVM = new CategoriesViewModel();
+
+        PodcastsGroup.CollectionChanged += (s, e) =>
+        {
+            Console.WriteLine($"^^^^^^^^^^^^^ PodcastsGroup Changed! ^^^^^^^^^^^^^^^^");
+            foreach (var showGroup in PodcastsGroup)
+            {
+                Console.WriteLine($"          showGroup: {showGroup.Name}");
+            }
+            Console.WriteLine($"-------------- PodcastsGroup Changed! ---------------");
+
+        };
     }
 
     internal async Task InitializeAsync()
@@ -70,8 +82,15 @@ public class DiscoverViewModel : BaseViewModel
     private async Task<List<ShowViewModel>> ConvertToViewModels(IEnumerable<Show> podcasts)
     {
         var viewmodels = new List<ShowViewModel>();
+        Console.WriteLine($"######### podcasts Count: {podcasts.Count()} !!");
         foreach (var podcast in podcasts)
         {
+            Console.WriteLine($"######### Fetching Title {podcast.Title} ID : {podcast.Id} !!");
+            Console.WriteLine($"######### Fetching {podcast.Episodes.Count()} Episodes: {podcast.Episodes} !!");
+            foreach (var episode in podcast.Episodes)
+            {
+                Console.WriteLine($"######### Fetching SHOW: {episode.Title}");
+            }
             var podcastViewModel = new ShowViewModel(podcast);
             await podcastViewModel.InitializeAsync();
             viewmodels.Add(podcastViewModel);
@@ -89,6 +108,8 @@ public class DiscoverViewModel : BaseViewModel
         };
 
         PodcastsGroup.ReplaceRange(list);
+
+        ShowList.ReplaceRange(listPodcasts);
     }
 
     private async Task OnSearchCommandAsync()

@@ -70,10 +70,11 @@
                                      CommandParameter="{Binding}"
                                      WidthRequest="24">
                             <ImageButton.IsVisible>
-                                <OnPlatform x:TypeArguments="x:Boolean">
+                                false
+                                <!--<OnPlatform x:TypeArguments="x:Boolean">
                                     <On Platform="Android,iOS">false</On>
                                     <On Platform="UWP,macOS">true</On>
-                                </OnPlatform>
+                                </OnPlatform>-->
                             </ImageButton.IsVisible>
                             <ImageButton.Triggers>
                                 <DataTrigger Binding="{Binding IsInListenLater}"

@@ -1,5 +1,8 @@
 <Project>
+<!--
   <PropertyGroup>
 	  <MauiV>6.0.101-preview.11.2082</MauiV>
   </PropertyGroup>
+  -->
+  <Import Project="../Directory.build.props" />
 </Project>

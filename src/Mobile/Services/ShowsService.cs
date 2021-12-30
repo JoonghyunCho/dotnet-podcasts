@@ -63,6 +63,12 @@ public class ShowsService
     public async Task<IEnumerable<Show>> SearchShowsAsync(string term)
     {
         var showsResponse = await TryGetAsync<IEnumerable<ShowResponse>>($"shows?limit=10&term={term}");
+        foreach(var show in showsResponse)
+        {
+            Console.WriteLine($"$$$$$$$$$$$$$$$ {show.Id}");
+            Console.WriteLine($"$$$$$$$$$$$$$$$ {show.Title}");
+            Console.WriteLine($"$$$$$$$$$$$$$$$ {show.Image}");
+        }
 
         return showsResponse?.Select(response => GetShow(response));
     }

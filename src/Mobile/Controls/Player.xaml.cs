@@ -33,8 +33,8 @@ public partial class Player : ContentView
         epiosdeTitle.Text = this.playerService.CurrentEpisode.Title;
         authorText.Text = $"{this.playerService.CurrentShow?.Author} - {this.playerService.CurrentEpisode?.Published.ToString("MMM, d yyy")}";
 
-        podcastImage.Source = this.playerService.CurrentShow?.Image;
-        duration.Text = this.playerService.CurrentEpisode?.Duration.ToString();
+        //podcastImage.Source = this.playerService.CurrentShow?.Image;
+        //duration.Text = this.playerService.CurrentEpisode?.Duration.ToString();
     }
 
     private void PlayerService_IsPlayingChanged(object sender, EventArgs e)

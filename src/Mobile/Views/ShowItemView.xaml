@@ -10,7 +10,7 @@
     <VerticalStackLayout.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding NavigateToDetailCommand}" />
     </VerticalStackLayout.GestureRecognizers>
-    <Grid>
+    <Grid BackgroundColor="yellow" HeightRequest="264">
         <Image Aspect="AspectFit"
                MinimumWidthRequest="{x:OnIdiom Phone=180, Default=264}"
                MinimumHeightRequest="{x:OnIdiom Default=264, Phone=180}"

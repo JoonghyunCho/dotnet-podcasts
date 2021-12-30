@@ -28,7 +28,9 @@
                                     SearchCommand="{Binding SearchCommand}"
                                     VerticalOptions="Start" />
         </StackLayout>
-        <CollectionView ItemsSource="{Binding PodcastsGroup}"
+        <CollectionView 
+            x:Name="collection"
+            ItemsSource="{Binding ShowList}"
                         Margin="10,50,10,0"
                         SelectionMode="None"
                         IsGrouped="True">

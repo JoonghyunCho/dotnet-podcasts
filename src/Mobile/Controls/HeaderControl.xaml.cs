@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.NetConf2021.Maui.Controls;
 
-public partial class HeaderControl : ContentView
+public partial class HeaderControl : Grid
 {
     public static readonly BindableProperty SearchCommandProperty =
         BindableProperty.Create(

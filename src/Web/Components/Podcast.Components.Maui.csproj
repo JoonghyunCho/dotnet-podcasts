@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
-		
+		<!--<TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>-->
+    <TargetFrameworks>net6.0;net6.0-tizen</TargetFrameworks>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
-		<Nullable>enable</Nullable>
+        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-tizen'">6.5</SupportedOSPlatformVersion>
+        <Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>Podcast.Components</RootNamespace>
 		<PackageId>Podcast.Components</PackageId>
@@ -20,8 +21,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+		<!--<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />-->
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
 	</ItemGroup>
+  
+  <ItemGroup Condition=" '$(UseMaui)' != 'true' ">
+    <ProjectReference Include="..\..\..\..\..\..\Core\src\Core-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\Controls\src\Xaml\Controls.Xaml-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\Controls\src\Core\Controls.Core-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\BlazorWebView\src\Maui\Microsoft.AspNetCore.Components.WebView.Maui.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\Essentials\src\Essentials-net6.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\Compatibility\Core\src\Compatibility-net6.csproj" />
+  </ItemGroup>
+
+  <Import Condition=" '$(UseMaui)' != 'true' " Project="..\..\..\..\..\..\BlazorWebView\src\Maui\build\Microsoft.AspNetCore.Components.WebView.Maui.targets" />
+
+  <!--<Import Project="..\..\..\..\Directory.Build.props"/>
+  <Import Project="..\..\..\..\Directory.Build.targets"/>-->
+  <!--<Import Project="..\..\..\..\..\..\..\.nuspec\Microsoft.Maui.Controls.MultiTargeting.targets" />-->
+
 
 </Project>

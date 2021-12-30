@@ -24,6 +24,8 @@ public class Show : ObservableObject
         Updated = response.Updated;
         Episodes = response.Episodes?.Select(resp => new Episode(resp));
         Categories = response.Categories?.Select(resp => new Category(resp));
+        Console.WriteLine($"######### Show. Title : {Title} !!");
+        Console.WriteLine($"######### Show. Image : {Image} !!");
     }
 
     public Guid Id { get; set; }
