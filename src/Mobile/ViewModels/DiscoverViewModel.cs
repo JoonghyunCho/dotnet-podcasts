@@ -110,6 +110,8 @@ public class DiscoverViewModel : BaseViewModel
         PodcastsGroup.ReplaceRange(list);
 
         ShowList.ReplaceRange(listPodcasts);
+        ShowList[0].Name = AppResource.Whats_New;
+        ShowList[1].Name = AppResource.Specially_For_You;
     }
 
     private async Task OnSearchCommandAsync()

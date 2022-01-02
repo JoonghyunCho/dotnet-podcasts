@@ -6,11 +6,12 @@
                       xmlns:viewmodels="clr-namespace:Microsoft.NetConf2021.Maui.ViewModels"
                       x:DataType="viewmodels:ShowViewModel"
                       x:Name="self"
+                      MinimumHeightRequest="264"
                       >
     <VerticalStackLayout.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding NavigateToDetailCommand}" />
     </VerticalStackLayout.GestureRecognizers>
-    <Grid BackgroundColor="yellow" HeightRequest="264">
+    <Grid>
         <Image Aspect="AspectFit"
                MinimumWidthRequest="{x:OnIdiom Phone=180, Default=264}"
                MinimumHeightRequest="{x:OnIdiom Default=264, Phone=180}"

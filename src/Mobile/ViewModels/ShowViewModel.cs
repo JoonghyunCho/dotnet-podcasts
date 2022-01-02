@@ -24,6 +24,7 @@ public class ShowViewModel : BaseViewModel
     public IEnumerable<Episode> Episodes { get => Show?.Episodes; }
 
     public Uri Image { get => Show?.Image; }
+    public string Name { get; set; }
 
     public string Author { get => Show?.Author; }
 
@@ -39,6 +40,13 @@ public class ShowViewModel : BaseViewModel
         Show = show;
         subscriptionsService = ServicesProvider.GetService<SubscriptionsService>();
     }
+
+    public ShowViewModel(string name, Show show)
+    {
+        Show = show;
+        subscriptionsService = ServicesProvider.GetService<SubscriptionsService>();
+    }
+
 
     internal Task InitializeAsync()
     {
